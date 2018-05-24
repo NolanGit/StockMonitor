@@ -1,15 +1,17 @@
-#coding=utf-8
-IsqQVc NprOob i49XU7Qb6iyI-zJFzKq8ukm8
-IsqQVc NprOob iGWdbQsLV5hw-zJFzKq8ukm8
-
+# coding=utf-8
+'''
+IsqQVc NprOob i49XU7Qb6iyI - zJFzKq8ukm8
+IsqQVc NprOob iGWdbQsLV5hw - zJFzKq8ukm8
+'''
 import requests
 import time
 from bs4 import BeautifulSoup
+import re
 
 
 class PriceGetter():
 
-    def __init__(self, fundcode):
+    def __init__(self, stockcode):
         self.stockcode = stockcode
 
     def get_price(self):
@@ -19,10 +21,10 @@ class PriceGetter():
             # time.sleep(5)  #避免网速低而加载过慢
             content = r.text
             soup = BeautifulSoup(content, 'lxml')
-            divs = soup.find_all(attrs={"class":re.compile(r"IsqQVc NprOob(\s\w+)?")})
+            divs = soup.find_all(attrs={"class": re.compile(r"IsqQVc NprOob(\s\w+)?")})
             print(divs)
 
-pg=PriceGetter("000893")
+pg = PriceGetter("000893")
 pg.get_price()
 '''
             if divs == []:
