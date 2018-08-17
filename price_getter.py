@@ -15,16 +15,15 @@ class PriceGetter():
         self.stockcode = stockcode
 
     def get_price(self):
-        while 1:
-            baseurl = 'https://www.google.com/search?q='
-            r = requests.get(baseurl + str(self.stockcode))
-            # time.sleep(5)  #避免网速低而加载过慢
-            content = r.text
-            soup = BeautifulSoup(content, 'lxml')
-            divs = soup.find_all(attrs={"class": re.compile(r"IsqQVc NprOob(\s\w+)?")})
-            print(divs)
+        baseurl = ('http://finance.sina.com.cn/realstock/company/sz000977/nc.shtml')
+        r = requests.get(baseurl)
+        time.sleep(5)  # 避免网速低而加载过慢
+        content = r.text
+        soup = BeautifulSoup(content, 'lxml')
+        divs = soup.find_all(class_='up')
+        print(divs)
 
-pg = PriceGetter("000893")
+pg = PriceGetter("000977")
 pg.get_price()
 '''
             if divs == []:
